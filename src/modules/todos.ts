@@ -6,10 +6,7 @@ const DELETE_TODO = "todos/DELETE_TODO" as const;
 // action 생성 함수
 export const addTodo = (text: string) => ({
   type: ADD_TODO,
-  payload: {
-    id: Date.now(),
-    text,
-  },
+  payload: text,
 });
 
 export const toggleTodo = (id: number) => ({
@@ -35,9 +32,20 @@ export type Todo = {
   done: boolean;
 };
 
-type TodosState = Todo[];
+export type TodosState = Todo[];
 
-const initialState: TodosState = [];
+const initialState: TodosState = [
+  {
+    id: 1234,
+    text: "타입스크립트 공부하기",
+    done: false,
+  },
+  {
+    id: 555,
+    text: "할일 완료!",
+    done: true,
+  },
+];
 
 // reducer
 function todoReducer(
@@ -47,8 +55,8 @@ function todoReducer(
   switch (action.type) {
     case ADD_TODO:
       return state.concat({
-        id: action.payload.id,
-        text: action.payload.text,
+        id: Date.now(),
+        text: action.payload,
         done: false,
       });
 

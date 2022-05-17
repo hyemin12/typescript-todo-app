@@ -2,6 +2,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
 }
 body {
   width: 100%;
@@ -11,71 +12,136 @@ body {
 li {
   list-style: none;
 }
+input {
+  padding: 10px;
+  outline: none;
+}
+input:focus {
+  outline: none;
+}
+button {
+  border: none;
+  cursor: pointer;
+}
+$mainColor: #fab005;
 
 .container {
   display: flex;
   justify-content: center;
   position: relative;
+  margin-top: 100px;
+
   div.inner {
     min-width: 500px;
     background-color: #fff;
     padding-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 5px 5px #ccc;
     // header
     header {
-      .tab-nav {
-        display: flex;
-        justify-content: center;
-        border-radius: 20px 20px 0 0;
-        li {
-          display: flex;
-          justify-content: center;
-          width: 50%;
-          padding: 20px 0;
-          background-color: #ccc;
-          cursor: pointer;
-          span {
-            display: inline-block;
-            background-size: cover;
-          }
-          span.icon-list {
-            width: 22px;
-            height: 22px;
-            background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512 '%3E%3Ctitle%3E%3C/title%3E%3Cg id='icomoon-ignore'%3E%3C/g%3E%3Cpath d='M0 0h128v128h-128zM192 32h320v64h-320zM0 192h128v128h-128zM192 224h320v64h-320zM0 384h128v128h-128zM192 416h320v64h-320z'%3E%3C/path%3E%3C/svg%3E");
-          }
-          span.icon-clipboard {
-            width: 25px;
-            height: 25px;
-            background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Ctitle%3E%3C/title%3E%3Cg id='icomoon-ignore'%3E%3C/g%3E%3Cpath d='M464 64h-144c0-35.346-28.653-64-64-64s-64 28.654-64 64h-144c-8.836 0-16 7.164-16 16v416c0 8.837 7.164 16 16 16h416c8.837 0 16-7.163 16-16v-416c0-8.836-7.163-16-16-16zM256 32c17.673 0 32 14.327 32 32s-14.327 32-32 32c-17.673 0-32-14.327-32-32s14.327-32 32-32zM448 480h-384v-384h64v48c0 8.836 7.164 16 16 16h224c8.837 0 16-7.164 16-16v-48h64v384z'%3E%3C/path%3E%3Cpath d='M224 429.255l-102.627-118.627 29.254-29.255 73.373 57.372 137.371-121.372 29.257 29.254z'%3E%3C/path%3E%3C/svg%3E");
-          }
-        }
-        li.active {
-          background-color: #fff;
-        }
+      padding: 30px;
+      border-bottom: 2px solid #f4f4f4;
+      h4 {
+        font-size: 1.6em;
+      }
+      p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+      span {
+        color: $mainColor;
       }
     }
     // todo list
+    p.empty-todo {
+      padding: 30px 0;
+      text-align: center;
+    }
     .todo-list {
-      padding: 40px 30px;
+      padding: 20px 30px;
 
       // todo-item
       .todo-item {
         display: flex;
         align-items: center;
         gap: 20px;
+        padding: 10px 0;
+        p {
+          width: 360px;
+          transition: 0.3s;
+        }
+        span.btn-delete {
+          color: tomato;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        span.btn-delete:hover {
+          opacity: 0.7;
+        }
+        // checkbox custom
+        input[type="checkbox"] {
+          display: none;
+        }
+        input[type="checkbox"] + label {
+          width: 20px;
+          height: 20px;
+          border: 1px solid #ccc;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        input[type="checkbox"]:checked + label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid $mainColor;
+          font-size: 12px;
+          color: $mainColor;
+        }
+      }
+      // 할일 완료
+      .todo-item.done {
+        p {
+          color: #ccc;
+          text-decoration: line-through;
+        }
+        span.btn-delete {
+          color: #ccc;
+        }
+      }
+    }
+    // create todo
+    .create-todo {
+      padding: 20px 30px;
+      form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        input {
+          flex-grow: 1;
+          border: none;
+          border-bottom: 1px solid #ccc;
+        }
+        button {
+          padding: 10px 20px;
+          background-color: $mainColor;
+          color: #fff;
+        }
       }
     }
   }
-
+  // create Btn
   div.btn-create {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #bac8ff;
+    background-color: $mainColor;
     border-radius: 50%;
     position: absolute;
     left: 50%;
+    bottom: -25px;
     transform: translateX(-50%);
     cursor: pointer;
     .icon-create {
@@ -83,6 +149,11 @@ li {
       height: 20px;
       background-size: cover;
       background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Ctitle%3E%3C/title%3E%3Cg id='icomoon-ignore'%3E%3C/g%3E%3Cpath fill='%23fff' d='M496 192h-176v-176c0-8.836-7.164-16-16-16h-96c-8.836 0-16 7.164-16 16v176h-176c-8.836 0-16 7.164-16 16v96c0 8.836 7.164 16 16 16h176v176c0 8.836 7.164 16 16 16h96c8.836 0 16-7.164 16-16v-176h176c8.836 0 16-7.164 16-16v-96c0-8.836-7.164-16-16-16z'%3E%3C/path%3E%3C/svg%3E");
+      transform: rotate(0);
+      transition: 0.6s;
+    }
+    .icon-create.create {
+      transform: rotate(45deg);
     }
   }
 }
