@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./modules/todos";
+import rootReducer from "./modules";
 import App from "./App";
 
-const store = configureStore({ reducer: todoReducer });
+const store = configureStore({ reducer: rootReducer });
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

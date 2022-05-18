@@ -17,11 +17,8 @@ function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   const handleDelete = () => {
     onDelete(todo.id);
   };
-  // <li className={(checked ? "done " : "") + "todo-item"}>
-  // {checked ? <i className="fas fa-check"></i> : ""}
   return (
     <li className={(checked ? "done " : "") + "todo-item"}>
-      {}
       <input
         type="checkbox"
         id={`check-${todo.id}`}

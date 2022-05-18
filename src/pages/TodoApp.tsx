@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import TodoInsert from "../components/TodoInsert";
 import TodoList from "../components/TodoList";
-import { TodosState } from "../modules/todos";
+import { RootState } from "../modules";
 import { addTodo, toggleTodo, deleteTodo } from "../modules/todos";
 import "../style.scss";
 
 function TodoApp() {
-  const todos = useSelector((state: TodosState) => state);
+  const todos = useSelector((state: RootState) => state.todoReducer);
   const dispatch = useDispatch();
 
   const [createMode, setCreate] = useState(false);

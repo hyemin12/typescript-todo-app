@@ -10,14 +10,14 @@ function Header({ todos }: TodoLengthProps) {
   const date = now.getDate();
   const day = now.getDay();
   const week = ["일", "월", "화", "수", "목", "금", "토"];
-  console.log(now);
+  const remain = todos.filter((todo) => todo.done === false);
   return (
     <header>
       <h4>
         {year}년 {month}월 {date}일
       </h4>
       <p>{week[day]}요일</p>
-      <span>할일 {todos.length}개 남음</span>
+      <span>할일 {remain.length}개 남음</span>
     </header>
   );
 }
