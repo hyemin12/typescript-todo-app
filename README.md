@@ -1,5 +1,10 @@
 # typescript Todo App
 
+<a href="https://hm-tsc-todo-app.netlify.app/" target="_blank"><img src="https://raw.githubusercontent.com/hyemin12/2022_portfolio/master/public/assets/nodejs-mysql.webp" /></a>
+이미지를 클릭하면 배포 사이트로 이동합니다.
+
+<hr>
+
 ## 기능
 
 - Todo Item 추가
