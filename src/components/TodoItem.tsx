@@ -1,28 +1,30 @@
 import React, { useState } from "react";
-import { Todo } from "../modules/todos";
+import { useDispatch } from "react-redux";
 
-// item props type 지정
-type TodoItemProps = {
-  todo: Todo;
-  onToggle: (id: number) => void;
-  onDelete: (id: number) => void;
-};
+import { deleteTodo, toggleTodo } from "../modules/todos";
+import { TodoProps } from "../modules/type";
 
-function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
+function TodoItem({ todo }: { todo: TodoProps }) {
   const [checked, setChecked] = useState(todo.done);
-  const handgeToggle = () => {
-    onToggle(todo.id);
-    setChecked(!checked);
+
+  const dispatch = useDispatch();
+
+  const handleToggle = () => {
+    dispatch(toggleTodo(todo.id));
   };
+
   const handleDelete = () => {
-    onDelete(todo.id);
+    dispatch(deleteTodo(todo.id));
   };
   return (
     <li className={(checked ? "done " : "") + "todo-item"}>
       <input
         type="checkbox"
         id={`check-${todo.id}`}
-        onClick={handgeToggle}
+        onClick={handleToggle}
+        onChange={() => {
+          setChecked(!checked);
+        }}
         checked={todo.done}
       />
       <label htmlFor={`check-${todo.id}`}>

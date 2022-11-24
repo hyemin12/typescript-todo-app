@@ -1,16 +1,14 @@
-import { Todo } from "../modules/todos";
+import { TodosState, TodoProps } from "../modules/type";
 
-type TodoLengthProps = {
-  todos: Todo[];
-};
-function Header({ todos }: TodoLengthProps) {
+function Header({ todos }: { todos: TodosState }) {
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth();
+  const month = now.getMonth() + 1;
   const date = now.getDate();
   const day = now.getDay();
   const week = ["일", "월", "화", "수", "목", "금", "토"];
-  const remain = todos.filter((todo) => todo.done === false);
+
+  const remain = todos.filter((todo: TodoProps) => todo.done === false);
   return (
     <header>
       <h4>

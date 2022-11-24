@@ -1,9 +1,16 @@
-// Action Type 정의
-const ADD_TODO = "todos/ADD_TODO" as const;
-const TOGGLE_TODO = "todos/TOGGLE_TODO" as const;
-const DELETE_TODO = "todos/DELETE_TODO" as const;
+import {
+  GET_TODO,
+  ADD_TODO,
+  TOGGLE_TODO,
+  DELETE_TODO,
+  TodosState,
+} from "./type";
 
 // action 생성 함수
+export const getTodo = (todos: TodosState) => ({
+  type: GET_TODO,
+  payload: todos,
+});
 export const addTodo = (text: string) => ({
   type: ADD_TODO,
   payload: text,
@@ -21,52 +28,37 @@ export const deleteTodo = (id: number) => ({
 
 // action type
 export type TodoAction =
+  | ReturnType<typeof getTodo>
   | ReturnType<typeof addTodo>
   | ReturnType<typeof toggleTodo>
   | ReturnType<typeof deleteTodo>;
 
-// type 초기값
-export type Todo = {
-  id: number;
-  text: string;
-  done: boolean;
-};
-
-export type TodosState = Todo[];
-
-const initialState: TodosState = [
-  {
-    id: 1234,
-    text: "타입스크립트 공부하기",
-    done: false,
-  },
-  {
-    id: 555,
-    text: "할일 완료!",
-    done: true,
-  },
-];
-
 // reducer
-function todoReducer(
-  state: TodosState = initialState,
-  action: TodoAction
-): TodosState {
+function todoReducer(state: TodosState = [], action: TodoAction): TodosState {
   switch (action.type) {
+    case GET_TODO:
+      state = [...action.payload];
+      return state;
     case ADD_TODO:
-      return state.concat({
+      const newArr = state.concat({
         id: Date.now(),
         text: action.payload,
         done: false,
       });
+      localStorage.setItem("todoApp", JSON.stringify(newArr));
+      return newArr;
 
     case TOGGLE_TODO:
-      return state.map((todo) =>
+      const toggleArr = state.map((todo) =>
         todo.id === action.payload ? { ...todo, done: !todo.done } : todo
       );
+      localStorage.setItem("todoApp", JSON.stringify(toggleArr));
+      return toggleArr;
 
     case DELETE_TODO:
-      return state.filter((todo) => todo.id !== action.payload);
+      const deleteArr = state.filter((todo) => todo.id !== action.payload);
+      localStorage.setItem("todoApp", JSON.stringify(deleteArr));
+      return deleteArr;
 
     default:
       return state;
