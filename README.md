@@ -10,7 +10,18 @@
 <br>
 <br>
 
-todo list 로컬스토리지에서 관리
+## 컴포넌트 구성
+
+- Header : 날짜 및 남은 할일 개수
+- TodoList : 할일 목록 리스트 <br>(TodoItem으로 이루어져 있음)
+- TodoInsert : 투두 작성 컴포넌트 <br>(add 버튼 누르면 새로운 할일 목록 생성)
+- CreateBtn : 할일 작성 컴포넌트를 보여주고, 숨기는 버튼 <br>(create 모드로 전환 시 + 모양이 x 모양으로 변경되고, TodoInsert 컴포넌트가 보여짐)
+- TodoItem : 할일 목록 <br>(완료 여부 checkbox, 할일 내용, 삭제버튼으로 이루어져있음)
+
+<br>
+<br>
+
+## todo list 로컬스토리지에서 관리
 
 1. 첫 로드 시 로컬스토리지에서 해당 투두 리스트 가져오기 (비동기)
 
