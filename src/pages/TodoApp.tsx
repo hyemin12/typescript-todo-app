@@ -1,9 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Header from "../components/Header";
 import TodoInsert from "../components/TodoInsert";
 import TodoList from "../components/TodoList";
+
 import { RootState } from "../modules";
 import { addTodo, toggleTodo, deleteTodo } from "../modules/todos";
 import "../style.scss";
@@ -23,13 +24,13 @@ function TodoApp() {
   const onToggle = (id: number) => {
     dispatch(toggleTodo(id));
   };
-  console.log(todos);
+
   return (
     <div className="container">
       <div className="inner">
         <Header todos={todos} />
         <TodoList todos={todos} onDelete={onDelete} onToggle={onToggle} />
-        {createMode && <TodoInsert onInsert={onInsert} />}
+        <TodoInsert onInsert={onInsert} mode={createMode} />
       </div>
       <div
         className="btn-create"

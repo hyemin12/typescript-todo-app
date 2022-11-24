@@ -2,9 +2,10 @@ import React, { FormEvent, useState } from "react";
 
 type TodoInsertProps = {
   onInsert: (text: string) => void;
+  mode: boolean;
 };
 
-function TodoInsert({ onInsert }: TodoInsertProps) {
+function TodoInsert({ onInsert, mode }: TodoInsertProps) {
   const [value, setValue] = useState("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -17,7 +18,7 @@ function TodoInsert({ onInsert }: TodoInsertProps) {
     }
   };
   return (
-    <div className="create-todo">
+    <div className={"create-todo" + (mode ? " view" : "")}>
       <form onSubmit={onSubmit}>
         <input
           type="text"

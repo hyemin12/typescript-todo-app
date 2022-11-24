@@ -37,6 +37,7 @@ $mainColor: #fab005;
     padding-bottom: 25px;
     border-radius: 5px;
     box-shadow: 3px 5px 5px #ccc;
+    position: relative;
     // header
     header {
       padding: 30px;
@@ -112,7 +113,18 @@ $mainColor: #fab005;
     }
     // create todo
     .create-todo {
-      padding: 20px 30px;
+      // display: none;
+      width: 100%;
+      background-color: #fff;
+      transition: 0.3s;
+      opacity: 0;
+      box-sizing: border-box;
+      &.view {
+        width: 100%;
+        opacity: 1;
+        display: block;
+        padding: 20px 30px;
+      }
       form {
         display: flex;
         align-items: center;
