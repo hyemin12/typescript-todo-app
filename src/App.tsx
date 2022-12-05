@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/Header";
@@ -9,8 +9,8 @@ import CreateBtn from "./components/CreateBtn";
 import { RootState } from "./modules";
 import { getTodo } from "./modules/todos";
 import "./style.scss";
-
 import useLocalStorage from "./hooks/useLocalStorage";
+
 const initialState = [
   {
     id: 1234,
@@ -25,33 +25,37 @@ const initialState = [
 ];
 
 function App() {
-  // const todos = useSelector((state: RootState) => state.todoReducer);
+  const todos = useSelector((state: RootState) => state.todoReducer);
 
   const dispatch = useDispatch();
-
+  const [state, setState] = useLocalStorage("todoApp", initialState);
   const [createMode, setCreate] = useState<boolean>(false);
-  // const [todos, dispatch] = useReducer(reducer,[])
 
-  const [todos, setTodos] = useLocalStorage("todoApp", initialState);
+  const getData = async () => {
+    const res = await localStorage.getItem("todoApp");
+    if (res !== null) {
+      dispatch(getTodo(JSON.parse(res)));
+    } else {
+      dispatch(
+        getTodo([
+          {
+            id: 1234,
+            text: "타입스크립트 공부하기",
+            done: false,
+          },
+          {
+            id: 555,
+            text: "할일 완료!",
+            done: true,
+          },
+        ])
+      );
+    }
+  };
 
-  // const getData = async () => {
-  //   const res = await localStorage.getItem("todoApp");
-
-  //   if (res !== null) {
-  //     console.log(JSON.parse(res));
-  //     dispatch(getTodo(JSON.parse(res)));
-  //   } else {
-  //     dispatch(
-  //       getTodo([
-
-  //       ])
-  //     );
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="App">
@@ -59,7 +63,12 @@ function App() {
         <div className="inner">
           <Header todos={todos} />
           <TodoList todos={todos} />
-          <TodoInsert createMode={createMode} setCreate={setCreate} />
+          <TodoInsert
+            createMode={createMode}
+            setCreate={setCreate}
+            state={state}
+            setState={setState}
+          />
           <CreateBtn createMode={createMode} setCreate={setCreate} />
         </div>
       </div>

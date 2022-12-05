@@ -1,10 +1,17 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 
 import { addTodo } from "../modules/todos";
-import { CreateModeProps } from "../type";
+import { TodosState } from "../modules/type";
 
-function TodoInsert({ setCreate, createMode }: CreateModeProps) {
+interface InsertProps {
+  createMode: boolean;
+  setCreate: Dispatch<SetStateAction<boolean>>;
+  setState: Dispatch<SetStateAction<TodosState>>;
+  state: TodosState;
+}
+
+function TodoInsert({ setCreate, createMode, state, setState }: InsertProps) {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
@@ -15,12 +22,13 @@ function TodoInsert({ setCreate, createMode }: CreateModeProps) {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (value.length !== 0) {
+    if (value.length <= 0) return alert("할 일을 입력해주세요!");
+    const newArr = state?.concat({ id: Date.now(), text: value, done: false });
+    if (newArr !== undefined) {
+      setState(newArr);
       dispatch(addTodo(value));
       setValue("");
       setCreate(false);
-    } else {
-      alert("할 일을 입력해주세요!");
     }
   };
   return (
