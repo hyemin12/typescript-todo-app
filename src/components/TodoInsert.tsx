@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { addTodo } from "../modules/todos";
-import { CreateModeProps } from "../modules/type";
+import { CreateModeProps } from "../type";
 
 function TodoInsert({ setCreate, createMode }: CreateModeProps) {
   const dispatch = useDispatch();

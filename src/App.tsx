@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/Header";
@@ -10,38 +10,48 @@ import { RootState } from "./modules";
 import { getTodo } from "./modules/todos";
 import "./style.scss";
 
+import useLocalStorage from "./hooks/useLocalStorage";
+const initialState = [
+  {
+    id: 1234,
+    text: "타입스크립트 공부하기",
+    done: false,
+  },
+  {
+    id: 555,
+    text: "할일 완료!",
+    done: true,
+  },
+];
+
 function App() {
-  const todos = useSelector((state: RootState) => state.todoReducer);
+  // const todos = useSelector((state: RootState) => state.todoReducer);
 
   const dispatch = useDispatch();
 
   const [createMode, setCreate] = useState<boolean>(false);
+  // const [todos, dispatch] = useReducer(reducer,[])
 
-  const getData = async () => {
-    const res = await localStorage.getItem("todoApp");
-    if (res !== null) {
-      dispatch(getTodo(JSON.parse(res)));
-    } else {
-      dispatch(
-        getTodo([
-          {
-            id: 1234,
-            text: "타입스크립트 공부하기",
-            done: false,
-          },
-          {
-            id: 555,
-            text: "할일 완료!",
-            done: true,
-          },
-        ])
-      );
-    }
-  };
+  const [todos, setTodos] = useLocalStorage("todoApp", initialState);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   const res = await localStorage.getItem("todoApp");
+
+  //   if (res !== null) {
+  //     console.log(JSON.parse(res));
+  //     dispatch(getTodo(JSON.parse(res)));
+  //   } else {
+  //     dispatch(
+  //       getTodo([
+
+  //       ])
+  //     );
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <div className="App">
