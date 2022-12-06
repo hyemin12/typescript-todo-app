@@ -1,6 +1,6 @@
-import { TodosState, TodoProps } from "../modules/type";
+import { TodosProps, TodoProps } from "../type";
 
-function Header({ todos }: { todos: TodosState }) {
+function Header({ todos }: { todos: TodosProps }) {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
