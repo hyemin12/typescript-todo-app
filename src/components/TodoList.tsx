@@ -1,16 +1,30 @@
+import React, { Dispatch, SetStateAction } from "react";
 import TodoItem from "./TodoItem";
 
-import { TodosState } from "../modules/type";
+import { TodosProps } from "../type";
 
-function TodoList({ todos }: { todos: TodosState }) {
+function TodoList({
+  todos,
+  setTodos,
+}: {
+  todos: TodosProps;
+  setTodos: Dispatch<SetStateAction<TodosProps>>;
+}) {
   if (todos.length === 0) return <p className="empty-todo">할일이 없습니다.</p>;
   return (
     <>
       {todos && (
         <ul className="todo-list">
-          {todos.map((todo) => (
-            <TodoItem todo={todo} key={todo.id} />
-          ))}
+          {todos
+            .sort((a, b) => (a.done > b.done ? 1 : -1))
+            .map((todo) => (
+              <TodoItem
+                todo={todo}
+                key={todo.id}
+                setTodos={setTodos}
+                todos={todos}
+              />
+            ))}
         </ul>
       )}
     </>

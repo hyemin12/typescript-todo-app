@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { TodoProps, TodosProps } from "../type";
 
-import { deleteTodo, toggleTodo } from "../modules/todos";
-import { TodoProps } from "../modules/type";
+interface ItemProps {
+  todo: TodoProps;
+  todos: TodosProps;
+  setTodos: Dispatch<SetStateAction<TodosProps>>;
+}
 
-function TodoItem({ todo }: { todo: TodoProps }) {
+function TodoItem({ todo, todos, setTodos }: ItemProps) {
   const [checked, setChecked] = useState(todo.done);
 
-  const dispatch = useDispatch();
-
+  // 할일 완료 토글함수
   const handleToggle = () => {
-    dispatch(toggleTodo(todo.id));
+    const newArr = todos.map((item) =>
+      item.id === todo.id ? { ...item, done: !item.done } : item
+    );
+    setTodos(newArr);
   };
-
+  // 할일 삭제
   const handleDelete = () => {
-    dispatch(deleteTodo(todo.id));
+    const newArr = todos.filter((item) => item.id !== todo.id);
+    setTodos(newArr);
   };
   return (
     <li className={(checked ? "done " : "") + "todo-item"}>

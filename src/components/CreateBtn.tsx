@@ -1,4 +1,4 @@
-import { CreateModeProps } from "../modules/type";
+import { CreateModeProps } from "../type";
 
 function CreateBtn({ createMode, setCreate }: CreateModeProps) {
   return (

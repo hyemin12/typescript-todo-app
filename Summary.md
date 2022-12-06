@@ -82,9 +82,9 @@ export type Todo = {
   done: boolean,
 };
 
-export type TodosState = Todo[];
+export type TodosProps = Todo[];
 
-const initialState: TodosState = [
+const initialState: TodosProps = [
   {
     id: 1234,
     text: "타입스크립트 공부하기",
@@ -104,9 +104,9 @@ const initialState: TodosState = [
 
 ```js
 function todoReducer(
-  state: TodosState = initialState,
+  state: TodosProps = initialState,
   action: TodoAction
-): TodosState {
+): TodosProps {
   switch (action.type) {
     case ADD_TODO:
       return state.concat({
