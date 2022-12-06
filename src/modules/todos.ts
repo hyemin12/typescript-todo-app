@@ -45,6 +45,7 @@ function todoReducer(state: TodosState = [], action: TodoAction): TodosState {
         text: action.payload,
         done: false,
       });
+      console.log(newArr);
       localStorage.setItem("todoApp", JSON.stringify(newArr));
       return newArr;
 

@@ -25,10 +25,11 @@ const initialState = [
 ];
 
 function App() {
-  const todos = useSelector((state: RootState) => state.todoReducer);
+  // const todos = useSelector((state: RootState) => state.todoReducer);
 
   const dispatch = useDispatch();
-  const [state, setState] = useLocalStorage("todoApp", initialState);
+  const [todos, setTodos] = useLocalStorage("todoApp", initialState);
+  console.log(todos);
   const [createMode, setCreate] = useState<boolean>(false);
 
   const getData = async () => {
@@ -62,12 +63,12 @@ function App() {
       <div className="container">
         <div className="inner">
           <Header todos={todos} />
-          <TodoList todos={todos} />
+          <TodoList todos={todos} setTodos={setTodos} />
           <TodoInsert
             createMode={createMode}
             setCreate={setCreate}
-            state={state}
-            setState={setState}
+            todos={todos}
+            setTodos={setTodos}
           />
           <CreateBtn createMode={createMode} setCreate={setCreate} />
         </div>

@@ -7,11 +7,11 @@ import { TodosState } from "../modules/type";
 interface InsertProps {
   createMode: boolean;
   setCreate: Dispatch<SetStateAction<boolean>>;
-  setState: Dispatch<SetStateAction<TodosState>>;
-  state: TodosState;
+  setTodos: any;
+  todos: TodosState;
 }
 
-function TodoInsert({ setCreate, createMode, state, setState }: InsertProps) {
+function TodoInsert({ setCreate, createMode, todos, setTodos }: InsertProps) {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
@@ -23,13 +23,12 @@ function TodoInsert({ setCreate, createMode, state, setState }: InsertProps) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (value.length <= 0) return alert("할 일을 입력해주세요!");
-    const newArr = state?.concat({ id: Date.now(), text: value, done: false });
-    if (newArr !== undefined) {
-      setState(newArr);
-      dispatch(addTodo(value));
-      setValue("");
-      setCreate(false);
-    }
+    const newArr = todos?.concat({ id: Date.now(), text: value, done: false });
+    console.log(todos, newArr);
+    setTodos(newArr);
+    // dispatch(addTodo(value));
+    setValue("");
+    setCreate(false);
   };
   return (
     <div className={"create-todo" + (createMode ? " view" : "")}>
