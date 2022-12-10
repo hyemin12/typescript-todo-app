@@ -1,8 +1,8 @@
 import React, { FormEvent, useState, Dispatch, SetStateAction } from "react";
-import { useDispatch } from "react-redux";
+
+import Input from "./Input";
 
 import { TodosProps } from "../type";
-import Input from "./Input";
 
 interface InsertProps {
   createMode: boolean;
@@ -13,10 +13,6 @@ interface InsertProps {
 
 function TodoInsert({ setCreate, createMode, todos, setTodos }: InsertProps) {
   const [value, setValue] = useState("");
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
