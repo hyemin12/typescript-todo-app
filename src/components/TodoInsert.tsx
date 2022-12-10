@@ -2,6 +2,7 @@ import React, { FormEvent, useState, Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 
 import { TodosProps } from "../type";
+import Input from "./Input";
 
 interface InsertProps {
   createMode: boolean;
@@ -31,11 +32,11 @@ function TodoInsert({ setCreate, createMode, todos, setTodos }: InsertProps) {
   return (
     <div className={"create-todo" + (createMode ? " view" : "")}>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={value}
-          placeholder="할 일을 입력하세요."
-          onChange={onChange}
+        <Input
+          type={"text"}
+          placeholder={"할 일을 입력하세요."}
+          state={value}
+          changeValue={setValue}
         />
         <button type="submit">등록</button>
       </form>

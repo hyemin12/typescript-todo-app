@@ -15,8 +15,12 @@ li {
   list-style: none;
 }
 input {
-  padding: 10px;
+  flex-grow: 1;
+  padding: 5px 10px;
   outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1em;
 }
 input:focus {
   outline: none;
@@ -24,6 +28,13 @@ input:focus {
 button {
   border: none;
   cursor: pointer;
+}
+span.btn {
+  cursor: pointer;
+  transition: 0.3s;
+}
+span.btn:hover {
+  opacity: 0.7;
 }
 
 .container {
@@ -83,14 +94,7 @@ button {
           width: 360px;
           transition: 0.3s;
         }
-        span.btn-delete {
-          color: tomato;
-          cursor: pointer;
-          transition: 0.3s;
-        }
-        span.btn-delete:hover {
-          opacity: 0.7;
-        }
+
         // checkbox custom
         input[type="checkbox"] {
           display: none;
@@ -140,11 +144,6 @@ button {
         display: flex;
         align-items: center;
         gap: 10px;
-        input {
-          flex-grow: 1;
-          border: none;
-          border-bottom: 1px solid #ccc;
-        }
         button {
           padding: 10px 20px;
           background-color: $mainColor;
