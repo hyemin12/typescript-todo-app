@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { TodoProps, TodosProps } from "../type";
 import Button from "./Button";
+import Checkbox from "./Checkbox";
 import Input from "./Input";
 
 interface ItemProps {
@@ -38,18 +39,12 @@ function TodoItem({ todo, todos, setTodos }: ItemProps) {
   };
   return (
     <li className={(checked ? "done " : "") + "todo-item"}>
-      <input
-        type="checkbox"
-        id={`check-${todo.id}`}
-        onClick={handleToggle}
-        onChange={() => {
-          setChecked(!checked);
-        }}
-        checked={todo.done}
+      <Checkbox
+        state={todo}
+        checked={checked}
+        setChecked={setChecked}
+        onToggle={handleToggle}
       />
-      <label htmlFor={`check-${todo.id}`}>
-        {checked ? <i className="fas fa-check"></i> : ""}
-      </label>
       {isEdit ? (
         <Input
           type={"text"}
