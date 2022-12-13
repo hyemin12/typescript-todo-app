@@ -1,5 +1,8 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { TodoProps, TodosProps } from "../type";
+import Button from "./Button";
+import Checkbox from "./Checkbox";
+import Input from "./Input";
 
 interface ItemProps {
   todo: TodoProps;
@@ -9,6 +12,8 @@ interface ItemProps {
 
 function TodoItem({ todo, todos, setTodos }: ItemProps) {
   const [checked, setChecked] = useState(todo.done);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [newTodo, setNewTodo] = useState(todo.text);
 
   // 할일 완료 토글함수
   const handleToggle = () => {
@@ -17,6 +22,16 @@ function TodoItem({ todo, todos, setTodos }: ItemProps) {
     );
     setTodos(newArr);
   };
+  // 할일 수정 함수
+  const handleEdit = () => {
+    setIsEdit(!isEdit);
+    if (isEdit && todo.text !== newTodo) {
+      const newArr = todos.map((item) =>
+        item.id === todo.id ? { ...item, text: newTodo } : item
+      );
+      setTodos(newArr);
+    }
+  };
   // 할일 삭제
   const handleDelete = () => {
     const newArr = todos.filter((item) => item.id !== todo.id);
@@ -24,22 +39,38 @@ function TodoItem({ todo, todos, setTodos }: ItemProps) {
   };
   return (
     <li className={(checked ? "done " : "") + "todo-item"}>
-      <input
-        type="checkbox"
-        id={`check-${todo.id}`}
-        onClick={handleToggle}
-        onChange={() => {
-          setChecked(!checked);
-        }}
-        checked={todo.done}
+      <Checkbox
+        state={todo}
+        checked={checked}
+        setChecked={setChecked}
+        onToggle={handleToggle}
       />
-      <label htmlFor={`check-${todo.id}`}>
-        {checked ? <i className="fas fa-check"></i> : ""}
-      </label>
-      <p>{todo.text}</p>
-      <span className="btn-delete" onClick={handleDelete}>
-        <i className="fas fa-minus-circle"></i>
-      </span>
+      {isEdit ? (
+        <Input
+          type={"text"}
+          changeValue={setNewTodo}
+          state={newTodo}
+          placeholder={""}
+        />
+      ) : (
+        <p>{todo.text}</p>
+      )}
+      {isEdit ? (
+        <Button
+          action={handleEdit}
+          icon={"fas fa-check"}
+          btnColor={"#fab005"}
+        />
+      ) : (
+        <>
+          <Button action={handleEdit} icon={"fas fa-pen"} btnColor={"#ccc"} />
+          <Button
+            action={handleDelete}
+            icon={"fas fa-minus-circle"}
+            btnColor={"tomato"}
+          />
+        </>
+      )}
     </li>
   );
 }
