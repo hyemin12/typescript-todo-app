@@ -1,17 +1,22 @@
-const Button = ({
-  action,
-  icon,
-  btnColor,
-}: {
-  action: () => void;
-  icon: string;
-  btnColor: string;
-}) => {
+interface ButtonProps {
+  action?: () => void;
+  icon?: string;
+  text?: string;
+  $type: string;
+  $disabled?: boolean;
+}
+
+function Button({ action, icon, $type, text, $disabled = false }: ButtonProps) {
+  console.log($disabled);
   return (
-    <span className="btn" style={{ color: btnColor }} onClick={action}>
-      <i className={icon}></i>
-    </span>
+    <button
+      className={`btn ${$type} ${icon ? "icon_btn" : " "} ${$disabled ? "disabled" : " "}`}
+      onClick={action}
+      disabled={$disabled}
+    >
+      {icon ? <i className={icon}></i> : <p>{text}</p>}
+    </button>
   );
-};
+}
 
 export default Button;

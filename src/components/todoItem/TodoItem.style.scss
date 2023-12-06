@@ -1,0 +1,40 @@
+@import "style.scss";
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+  p {
+    width: 360px;
+    transition: 0.3s;
+  }
+
+  // checkbox custom
+  input[type="checkbox"] {
+    display: none;
+  }
+  input[type="checkbox"] + label {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  input[type="checkbox"]:checked + label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $mainColor;
+    font-size: 12px;
+    color: $mainColor;
+  }
+  //   할일 완료 스타일
+  &.done {
+    p {
+      color: #ccc;
+      text-decoration: line-through;
+    }
+  }
+}

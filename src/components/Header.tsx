@@ -1,4 +1,4 @@
-import { TodosProps, TodoProps } from "../type";
+import { TodosProps, TodoProps } from "type/type";
 
 function Header({ todos }: { todos: TodosProps }) {
   const now = new Date();
@@ -9,6 +9,7 @@ function Header({ todos }: { todos: TodosProps }) {
   const week = ["일", "월", "화", "수", "목", "금", "토"];
 
   const remain = todos.filter((todo: TodoProps) => todo.done === false);
+
   return (
     <header>
       <h4>

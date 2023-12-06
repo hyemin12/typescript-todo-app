@@ -1,38 +1,20 @@
-import React, { useState } from "react";
+import CreateTodo from "components/createTodo";
+import Header from "components/Header";
+import TodoList from "components/todolist/";
 
-import Header from "./components/Header";
-import TodoList from "./components/TodoList";
-import TodoInsert from "./components/TodoInsert";
-import CreateBtn from "./components/CreateBtn";
+import useLocalStorage from "hooks/useLocalStorage";
 
-import useLocalStorage from "./hooks/useLocalStorage";
-
-import "./style.scss";
-
-const initialState = [
-  {
-    id: 1234,
-    text: "타입스크립트 공부하기",
-    done: false,
-  },
-  {
-    id: 555,
-    text: "할일 완료!",
-    done: true,
-  },
-];
+import "style.scss";
 
 function App() {
-  const [todos, setTodos] = useLocalStorage("todoApp", initialState);
-
-  const [createMode, setCreate] = useState<boolean>(false);
+  const [todos, setTodos] = useLocalStorage("todoApp");
 
   return (
     <div className='App'>
       <div className='container'>
         <div className='inner'>
           <Header todos={todos} />
-          <TodoInsert createMode={createMode} setCreate={setCreate} todos={todos} setTodos={setTodos} />
+          <CreateTodo todos={todos} setTodos={setTodos} />
           <TodoList todos={todos} setTodos={setTodos} />
         </div>
       </div>

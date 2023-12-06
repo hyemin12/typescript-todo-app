@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { TodoProps } from "../type";
+import { TodoProps } from "../type/type";
 
 interface CheckboxProps {
   checked: boolean;
@@ -13,7 +13,7 @@ const Checkbox = ({ checked, setChecked, state, onToggle }: CheckboxProps) => {
   return (
     <>
       <input
-        type="checkbox"
+        type='checkbox'
         id={`check-${id}`}
         onClick={onToggle}
         onChange={() => {
@@ -21,9 +21,7 @@ const Checkbox = ({ checked, setChecked, state, onToggle }: CheckboxProps) => {
         }}
         checked={done}
       />
-      <label htmlFor={`check-${id}`}>
-        {checked ? <i className="fas fa-check"></i> : ""}
-      </label>
+      <label htmlFor={`check-${id}`}>{checked ? <i className='fas fa-check'></i> : ""}</label>
     </>
   );
 };
