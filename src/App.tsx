@@ -28,18 +28,12 @@ function App() {
   const [createMode, setCreate] = useState<boolean>(false);
 
   return (
-    <div className="App">
-      <div className="container">
-        <div className="inner">
+    <div className='App'>
+      <div className='container'>
+        <div className='inner'>
           <Header todos={todos} />
+          <TodoInsert createMode={createMode} setCreate={setCreate} todos={todos} setTodos={setTodos} />
           <TodoList todos={todos} setTodos={setTodos} />
-          <TodoInsert
-            createMode={createMode}
-            setCreate={setCreate}
-            todos={todos}
-            setTodos={setTodos}
-          />
-          <CreateBtn createMode={createMode} setCreate={setCreate} />
         </div>
       </div>
     </div>
