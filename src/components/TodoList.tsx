@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import TodoItem from "components/TodoItem";
+import TodoItem from "components/todoItem";
 import { TodosProps } from "type/type";
 
 function TodoList({ todos, setTodos }: { todos: TodosProps; setTodos: Dispatch<SetStateAction<TodosProps>> }) {

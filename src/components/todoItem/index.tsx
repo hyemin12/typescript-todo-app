@@ -39,14 +39,15 @@ function TodoItem({ todo, todos, setTodos }: ItemProps) {
     <li className={(checked ? "done " : "") + "todo-item"}>
       <Checkbox state={todo} checked={checked} setChecked={setChecked} onToggle={handleToggle} />
 
-      {isEdit ? <Input type={"text"} changeValue={setNewTodo} state={newTodo} placeholder={""} /> : <p>{todo.text}</p>}
+      {isEdit ? <Input type='text' state={newTodo} changeValue={setNewTodo} placeholder='' /> : <p>{todo.text}</p>}
+
       {isEdit ? (
         <Button action={handleEdit} icon='fas fa-check' $type='primary' />
       ) : (
-        <>
+        <div className='btn_wrapper'>
           <Button action={handleEdit} icon='fas fa-pen' $type='default' $disabled={checked} />
           <Button action={handleDelete} icon={"fas fa-minus-circle"} $type='danger' />
-        </>
+        </div>
       )}
     </li>
   );

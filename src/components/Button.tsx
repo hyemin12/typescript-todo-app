@@ -14,7 +14,7 @@ function Button({ action, icon, $type, text, $disabled = false }: ButtonProps) {
       onClick={action}
       disabled={$disabled}
     >
-      {icon ? <i className={icon}></i> : <p>{text}</p>}
+      {icon ? <i className={icon}></i> : <>{text}</>}
     </button>
   );
 }
