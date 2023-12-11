@@ -1,4 +1,5 @@
 import { TodosProps, TodoProps } from "type/type";
+import Button from "./Button";
 
 function Header({ todos }: { todos: TodosProps }) {
   const now = new Date();
@@ -16,6 +17,7 @@ function Header({ todos }: { todos: TodosProps }) {
         {year}년 {month}월 {date}일
       </h4>
       <p>{week[day]}요일</p>
+
       {remain.length > 0 ? <span>할일 {remain.length}개 남음</span> : <span>할일이 없어요</span>}
     </header>
   );

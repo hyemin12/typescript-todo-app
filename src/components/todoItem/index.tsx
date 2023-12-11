@@ -1,15 +1,13 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { TodoProps, TodosProps } from "type/type";
+import { TodoProps, TodoStateProps } from "type/type";
 import Checkbox from "components/Checkbox";
 import Input from "components/Input";
 import Button from "components/Button";
 
 import "./TodoItem.style.scss";
 
-interface ItemProps {
+interface ItemProps extends TodoStateProps {
   todo: TodoProps;
-  todos: TodosProps;
-  setTodos: Dispatch<SetStateAction<TodosProps>>;
 }
 
 function TodoItem({ todo, todos, setTodos }: ItemProps) {
@@ -19,6 +17,8 @@ function TodoItem({ todo, todos, setTodos }: ItemProps) {
 
   // 할일 완료 토글함수
   const handleToggle = () => {
+    if (!setChecked) return;
+    setChecked(!checked);
     const newArr = todos.map((item) => (item.id === todo.id ? { ...item, done: !item.done } : item));
     setTodos(newArr);
   };

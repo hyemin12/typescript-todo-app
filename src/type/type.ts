@@ -13,3 +13,8 @@ export interface CreateModeProps {
   createMode: boolean;
   setCreate: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface TodoStateProps {
+  todos: TodosProps;
+  setTodos: Dispatch<SetStateAction<TodosProps>>;
+}

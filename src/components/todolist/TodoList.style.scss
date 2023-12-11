@@ -1,13 +1,9 @@
-$mainColor: #fab005;
-$grayColor: #ccc;
-$dangerColor: rgb(255, 14, 14);
-
 .empty-todo {
   padding: 30px 0;
   text-align: center;
   h4 {
     font-weight: normal;
-    color: $mainColor;
+    color: var(---main--color);
     margin-bottom: 0.5em;
   }
   p {

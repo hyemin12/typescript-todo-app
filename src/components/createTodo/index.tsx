@@ -5,7 +5,7 @@ import { TodosProps } from "type/type";
 import "./CreateTodo.style.scss";
 
 interface CreateTodoProps {
-  setTodos: Dispatch<SetStateAction<TodosProps>>;
+  setTodos?: Dispatch<SetStateAction<TodosProps>>;
   todos: TodosProps;
 }
 
@@ -30,6 +30,7 @@ function CreateTodo({ todos, setTodos }: CreateTodoProps) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
+    if (!setTodos) return;
     if (value.length <= 0) return alert("할 일을 입력해주세요!");
 
     const newArr = todos?.concat({ id: Date.now(), text: value, done: false });

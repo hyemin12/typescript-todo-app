@@ -1,6 +1,8 @@
-$mainColor: #fab005;
-$grayColor: #ccc;
-$dangerColor: rgb(255, 14, 14);
+:root {
+  ---main--color: #fab005;
+  ---gray--color: #ccc;
+  ---danger--color: rgb(255, 14, 14);
+}
 
 // common
 * {
@@ -22,7 +24,7 @@ input {
   padding: 5px 10px;
   outline: none;
   border: none;
-  border-bottom: 1px solid $grayColor;
+  border-bottom: 1px solid var(---gray--color);
   font-size: 1em;
 }
 input:focus {
@@ -36,11 +38,17 @@ button {
   cursor: pointer;
   transition: all 0.3s;
   &.primary {
-    background-color: $mainColor;
+    background-color: var(---main--color);
     color: #fff;
   }
   &.gray {
-    background-color: $grayColor;
+    background-color: var(---gray--color);
+  }
+  &.border {
+    border: 1px solid #555;
+  }
+  &.border_primary {
+    border: 1px solid var(---main--color);
   }
   &:hover {
     opacity: 0.6;
@@ -51,15 +59,15 @@ button {
   }
   &.icon_btn.primary {
     background-color: transparent;
-    color: $mainColor;
+    color: var(---main--color);
   }
   &.icon_btn.danger {
     background-color: transparent;
-    color: $dangerColor;
+    color: var(---danger--color);
   }
   &.icon_btn.gray {
     background-color: transparent;
-    color: $grayColor;
+    color: var(---gray--color);
   }
   &.disabled {
     opacity: 0.7;
@@ -76,14 +84,13 @@ button {
   div.inner {
     min-width: 590px;
     background-color: #fff;
-    padding-bottom: 25px;
     border-radius: 5px;
     box-shadow: 3px 5px 5px #ccc;
     position: relative;
     // header
     header {
-      padding: 30px;
-      border-bottom: 2px solid #f4f4f4;
+      padding: 30px 30px 15px 30px;
+      // border-bottom: 2px solid #f4f4f4;
       h4 {
         font-size: 1.6em;
       }
@@ -92,8 +99,17 @@ button {
         margin-bottom: 20px;
       }
       span {
-        color: $mainColor;
+        color: var(---main--color);
+      }
+      > div {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
+}
+
+input[type="radio"] {
+  vertical-align: middle;
+  appearance: none;
 }
