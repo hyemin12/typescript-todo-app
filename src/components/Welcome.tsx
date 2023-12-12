@@ -1,39 +1,37 @@
 import { Dispatch, SetStateAction } from "react";
 import Header from "components/Header";
-import CreateTodo from "components/createTodo";
+import CreateTodo from "components/CreateTodo";
 import Button from "components/Button";
-
-import "./Welcome.style.scss";
 
 const Welcome = ({ setWelcomeTip }: { setWelcomeTip: Dispatch<SetStateAction<boolean>> }) => {
   const todos = [
     {
       id: 1,
       text: "React 공식 문서 읽기",
-      done: false,
+      complete: false,
     },
   ];
   const closeWelcomeTip = () => {
     setWelcomeTip(false);
   };
-  const { id, text, done } = todos[0];
+  const { id, text, complete } = todos[0];
   return (
     <div className='welcome-tip-wrapper'>
       <Button $type='defalt' text='닫기' action={closeWelcomeTip} />
       <Header todos={todos} />
       <div className='create-todo-wrapper'>
-        <CreateTodo todos={todos} />
+        <CreateTodo />
       </div>
 
       <ul className='todo-list'>
-        <li className={(done ? "done " : "") + "todo-item"}>
+        <li className={(complete ? "done " : "") + "todo-item"}>
           <>
-            <input type='checkbox' id={`check-${id}`} checked={done} />
-            <label htmlFor={`check-${id}`}>{done ? <i className='fas fa-check'></i> : ""}</label>
+            <input type='checkbox' id={`check-${id}`} checked={complete} />
+            <label htmlFor={`check-${id}`}>{complete ? <i className='fas fa-check'></i> : ""}</label>
           </>
           <p>{text}</p>
           <div className='btn_elcomeTodoItemrapper'>
-            <Button icon='fas fa-pen' $type='default' $disabled={done} />
+            <Button icon='fas fa-pen' $type='default' $disabled={complete} />
             <Button icon={"fas fa-minus-circle"} $type='danger' />
           </div>
         </li>

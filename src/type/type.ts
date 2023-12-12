@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 export type TodoProps = {
   id: number;
   text: string;
-  done: boolean;
+  complete: boolean;
 };
 
 export type TodosProps = TodoProps[];

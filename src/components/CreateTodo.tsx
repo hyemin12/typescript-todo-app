@@ -1,15 +1,9 @@
-import React, { FormEvent, useState, Dispatch, SetStateAction } from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "components/Button";
-import { TodosProps } from "type/type";
+import useTodoStore from "store/store";
 
-import "./CreateTodo.style.scss";
-
-interface CreateTodoProps {
-  setTodos?: Dispatch<SetStateAction<TodosProps>>;
-  todos: TodosProps;
-}
-
-function CreateTodo({ todos, setTodos }: CreateTodoProps) {
+function CreateTodo() {
+  const { addTodo } = useTodoStore();
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -30,12 +24,11 @@ function CreateTodo({ todos, setTodos }: CreateTodoProps) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!setTodos) return;
     if (value.length <= 0) return alert("할 일을 입력해주세요!");
 
-    const newArr = todos?.concat({ id: Date.now(), text: value, done: false });
+    const newTodo = { id: Date.now(), text: value, complete: false };
 
-    setTodos(newArr);
+    addTodo(newTodo);
     setValue("");
   };
 

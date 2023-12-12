@@ -1,17 +1,16 @@
-import { useState } from "react";
-import CreateTodo from "components/createTodo";
+import { useEffect, useState } from "react";
+import CreateTodo from "components/CreateTodo";
 import Header from "components/Header";
-import TodoList from "components/todolist/";
-
-import useLocalStorage from "hooks/useLocalStorage";
-
-import "style.scss";
-import Welcome from "components/welcome";
+import TodoList from "components/TodoList";
+import Welcome from "components/Welcome";
 import Button from "components/Button";
 
+import useTodoStore from "store/store";
+import "style.scss";
+
 function App() {
-  const [todos, setTodos] = useLocalStorage("todoApp");
-  const [welcomeTip, setWelcomeTip] = useState(true);
+  const { deleteCompleteTodo } = useTodoStore();
+  const [welcomeTip, setWelcomeTip] = useState(false);
 
   return (
     <div className='App'>
@@ -21,7 +20,10 @@ function App() {
             <Welcome setWelcomeTip={setWelcomeTip} />
           ) : (
             <>
-              <Header todos={todos} />
+              <Header />
+
+              <CreateTodo />
+              <TodoList setWelcomeTip={setWelcomeTip} />
               <div>
                 <form>
                   <input type='radio' name='todo-filter' checked value='모두' />
@@ -33,10 +35,8 @@ function App() {
                   <input type='radio' name='todo-filter' value='중요' />
                   <label>중요</label>
                 </form>
-                <Button $type='transparent' text='완료 할일 삭제' />
+                <Button $type='transparent' text='완료 할일 삭제' action={deleteCompleteTodo} />
               </div>
-              <CreateTodo todos={todos} setTodos={setTodos} />
-              <TodoList todos={todos} setTodos={setTodos} setWelcomeTip={setWelcomeTip} />
             </>
           )}
         </div>

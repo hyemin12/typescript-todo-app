@@ -1,8 +1,6 @@
-:root {
-  ---main--color: #fab005;
-  ---gray--color: #ccc;
-  ---danger--color: rgb(255, 14, 14);
-}
+$mainColor: #fab005;
+$grayColor: #ccc;
+$dangerColor: rgb(255, 14, 14);
 
 // common
 * {
@@ -24,7 +22,7 @@ input {
   padding: 5px 10px;
   outline: none;
   border: none;
-  border-bottom: 1px solid var(---gray--color);
+  border-bottom: 1px solid $grayColor;
   font-size: 1em;
 }
 input:focus {
@@ -38,17 +36,17 @@ button {
   cursor: pointer;
   transition: all 0.3s;
   &.primary {
-    background-color: var(---main--color);
+    background-color: $mainColor;
     color: #fff;
   }
   &.gray {
-    background-color: var(---gray--color);
+    background-color: $grayColor;
   }
   &.border {
     border: 1px solid #555;
   }
   &.border_primary {
-    border: 1px solid var(---main--color);
+    border: 1px solid $mainColor;
   }
   &:hover {
     opacity: 0.6;
@@ -59,15 +57,15 @@ button {
   }
   &.icon_btn.primary {
     background-color: transparent;
-    color: var(---main--color);
+    color: $mainColor;
   }
   &.icon_btn.danger {
     background-color: transparent;
-    color: var(---danger--color);
+    color: $dangerColor;
   }
   &.icon_btn.gray {
     background-color: transparent;
-    color: var(---gray--color);
+    color: $grayColor;
   }
   &.disabled {
     opacity: 0.7;
@@ -99,7 +97,7 @@ button {
         margin-bottom: 20px;
       }
       span {
-        color: var(---main--color);
+        color: $mainColor;
       }
       > div {
         display: flex;
@@ -107,6 +105,128 @@ button {
       }
     }
   }
+}
+// CreateTodo
+.create_todo_wrapper {
+  width: 100%;
+  padding: 1em 2em;
+  form {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    input {
+      height: 40px;
+      border: none;
+      border: 1px solid #eee;
+      padding: 0 1em;
+      border-radius: 25px 0 0 25px;
+    }
+    button {
+      height: 100%;
+      padding: 10px 20px;
+      background-color: $mainColor;
+      color: #fff;
+      border-radius: 0 25px 25px 0;
+    }
+  }
+  .error_msg {
+    font-size: 0.8em;
+    color: $dangerColor;
+  }
+}
+// TODO LIST
+.empty-todo {
+  padding: 30px 0;
+  text-align: center;
+  h4 {
+    font-weight: normal;
+    color: $mainColor;
+    margin-bottom: 0.5em;
+  }
+  p {
+    font-size: 0.9em;
+    color: #666;
+  }
+  .tool-tip-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+    padding-top: 2em;
+    .tool-tip-btn {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+.todo-list {
+  padding: 20px 30px;
+  max-height: 40vh;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #a1a1a1;
+  }
+}
+
+// TODO ITEM
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  p {
+    width: 360px;
+    transition: 0.3s;
+  }
+
+  // checkbox custom
+  .checkbox {
+    input[type="checkbox"] {
+      display: none;
+    }
+    input[type="checkbox"] + label {
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      margin-right: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    input[type="checkbox"]:checked + label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $mainColor;
+      font-size: 12px;
+      color: $mainColor;
+    }
+  }
+
+  p {
+    flex-grow: 1;
+  }
+  //   할일 완료 스타일
+  &.done {
+    p {
+      color: #ccc;
+      text-decoration: line-through;
+    }
+  }
+}
+// Welcome
+.welcome-tip-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 input[type="radio"] {

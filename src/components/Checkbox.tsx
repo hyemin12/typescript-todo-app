@@ -1,21 +1,19 @@
-import { Dispatch, SetStateAction } from "react";
+import useTodoStore from "store/store";
 import { TodoProps } from "../type/type";
 
-interface CheckboxProps {
-  checked: boolean;
-  setChecked?: Dispatch<SetStateAction<boolean>>;
-  state: TodoProps;
-  onToggle: () => void;
-}
+const Checkbox = ({ state }: { state: TodoProps }) => {
+  const { id, complete } = state;
+  const { toggleCompleteTodo } = useTodoStore();
 
-const Checkbox = ({ checked, state, onToggle }: CheckboxProps) => {
-  const { id, done } = state;
+  const onToggleComplete = () => {
+    toggleCompleteTodo(id);
+  };
 
   return (
-    <>
-      <input type='checkbox' id={`check-${id}`} onClick={onToggle} onChange={onToggle} checked={done} />
-      <label htmlFor={`check-${id}`}>{checked ? <i className='fas fa-check'></i> : ""}</label>
-    </>
+    <div className='checkbox'>
+      <input type='checkbox' id={`check-${id}`} onChange={() => {}} onClick={onToggleComplete} checked={complete} />
+      <label htmlFor={`check-${id}`}>{complete ? <i className='fas fa-check'></i> : ""}</label>
+    </div>
   );
 };
 export default Checkbox;

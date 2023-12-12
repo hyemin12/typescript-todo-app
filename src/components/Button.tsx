@@ -7,7 +7,6 @@ interface ButtonProps {
 }
 
 function Button({ action, icon, $type, text, $disabled = false }: ButtonProps) {
-  console.log($disabled);
   return (
     <button
       className={`btn ${$type} ${icon ? "icon_btn" : " "} ${$disabled ? "disabled" : " "}`}
