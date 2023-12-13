@@ -35,6 +35,10 @@ button {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s;
+  :focus {
+    border: none;
+    outline: $mainColor;
+  }
   &.primary {
     background-color: $mainColor;
     color: #fff;
@@ -120,6 +124,9 @@ button {
       border: 1px solid #eee;
       padding: 0 1em;
       border-radius: 25px 0 0 25px;
+      &:focus {
+        border: 1px solid $mainColor;
+      }
     }
     button {
       height: 100%;
@@ -221,15 +228,47 @@ button {
     }
   }
 }
+.feature-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #f4f4f4;
+  padding: 6px 25px;
+  fieldset {
+    display: flex;
+    gap: 6px;
+    border: none;
+    // FilterRadio
+    .filter-radio {
+      input[type="radio"] {
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+      }
+      label {
+        display: inline-block;
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 0.8em;
+        color: $grayColor;
+        transition: all 0.3s;
+      }
+      label:hover,
+      input[type="radio"]:checked + label,
+      input[type="radio"]:focus + label {
+        color: #555 !important;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
 // Welcome
 .welcome-tip-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
   z-index: 10;
-}
-
-input[type="radio"] {
-  vertical-align: middle;
-  appearance: none;
 }

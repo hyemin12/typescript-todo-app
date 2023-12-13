@@ -1,6 +1,6 @@
 import { TodoProps, TodosProps } from "type/type";
 import { create } from "zustand";
-import { persist, createJSONStorage, createWebStorage, StateCreator } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 const initialState: TodosProps = [
   {
@@ -17,6 +17,7 @@ const initialState: TodosProps = [
 
 interface TodoState {
   todos: TodosProps;
+  filter: string;
   addTodo: (todo: TodoProps) => void;
   editTodo: ({ text, id }: { text: string; id: number }) => void;
   toggleCompleteTodo: (id: number) => void;
@@ -30,6 +31,7 @@ const useTodoStore = create(
   persist<TodoState>(
     (set) => ({
       todos: initialState,
+      filter: "All",
       addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
       editTodo: ({ text, id }) =>
         set((state) => ({
@@ -48,17 +50,9 @@ const useTodoStore = create(
           todos: state.todos.filter((item) => item.text.includes(query.toLowerCase())),
         })),
       filterTodo: (filter) =>
-        set((state) => {
-          const FILTER_TYPE = filter.toUpperCase();
-
-          if (FILTER_TYPE === "COMPLETE") {
-            return { todos: state.todos.filter((item) => item.complete) };
-          } else if (FILTER_TYPE === "UNCOMPLETE") {
-            return { todos: state.todos.filter((item) => !item.complete) };
-          }
-
-          return { todos: state.todos };
-        }),
+        set((state) => ({
+          filter,
+        })),
       deleteCompleteTodo: () =>
         set((state) => ({
           todos: state.todos.filter((item) => !item.complete),

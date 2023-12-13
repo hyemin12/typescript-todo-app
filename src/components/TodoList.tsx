@@ -1,16 +1,30 @@
 import { Dispatch, SetStateAction } from "react";
 import TodoItem from "components/TodoItem";
 import useTodoStore from "store/store";
+import { TodosProps } from "type/type";
 
 interface TodoListProps {
   setWelcomeTip: Dispatch<SetStateAction<boolean>>;
 }
 
+const filteredTodo = ({ todos, filter }: { todos: TodosProps; filter: string }) => {
+  const FILTER_TYPE = filter.toUpperCase();
+  switch (FILTER_TYPE) {
+    case "COMPLETE":
+      return todos.filter((item) => item.complete);
+    case "ACTIVE":
+      return todos.filter((item) => !item.complete);
+    default:
+      return todos;
+  }
+};
+
 function TodoList({ setWelcomeTip }: TodoListProps) {
-  const { todos } = useTodoStore();
+  const { todos, filter } = useTodoStore();
   const openWelcomeTip = () => {
     setWelcomeTip(true);
   };
+  console.log(filter);
   if (todos.length <= 0)
     return (
       <div className='empty-todo'>
@@ -26,7 +40,7 @@ function TodoList({ setWelcomeTip }: TodoListProps) {
     );
   return (
     <ul className='todo-list'>
-      {todos
+      {filteredTodo({ todos, filter })
         .sort((a, b) => (a.complete > b.complete ? 1 : -1))
         .map((todo) => (
           <TodoItem todo={todo} key={todo.id} />
