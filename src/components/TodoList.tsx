@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import TodoItem from "components/TodoItem";
 import useTodoStore from "store/store";
+import { filterActiveTodo, filterCompleteTodo } from "utils/filteredTodos";
 import { TodosProps } from "type/type";
 
 interface TodoListProps {
@@ -11,9 +12,9 @@ const filteredTodo = ({ todos, filter }: { todos: TodosProps; filter: string }) 
   const FILTER_TYPE = filter.toUpperCase();
   switch (FILTER_TYPE) {
     case "COMPLETE":
-      return todos.filter((item) => item.complete);
+      return filterCompleteTodo(todos);
     case "ACTIVE":
-      return todos.filter((item) => !item.complete);
+      return filterActiveTodo(todos);
     default:
       return todos;
   }
@@ -24,7 +25,8 @@ function TodoList({ setWelcomeTip }: TodoListProps) {
   const openWelcomeTip = () => {
     setWelcomeTip(true);
   };
-  console.log(filter);
+  const filteredTodos = filteredTodo({ todos, filter });
+
   if (todos.length <= 0)
     return (
       <div className='empty-todo'>
@@ -38,9 +40,15 @@ function TodoList({ setWelcomeTip }: TodoListProps) {
         </div>
       </div>
     );
+  if (filteredTodos.length === 0)
+    return (
+      <div className='empty-todo'>
+        <h4>{filter === "active" ? "진행 중인" : "완료된"}할 일이 없습니다.</h4>
+      </div>
+    );
   return (
     <ul className='todo-list'>
-      {filteredTodo({ todos, filter })
+      {filteredTodos
         .sort((a, b) => (a.complete > b.complete ? 1 : -1))
         .map((todo) => (
           <TodoItem todo={todo} key={todo.id} />

@@ -1,19 +1,9 @@
 import { TodoProps, TodosProps } from "type/type";
+import { filterActiveTodo } from "utils/filteredTodos";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-const initialState: TodosProps = [
-  {
-    id: 1234,
-    text: "타입스크립트 공부하기",
-    complete: false,
-  },
-  {
-    id: 555,
-    text: "할일 완료!",
-    complete: true,
-  },
-];
+const initialState: TodosProps = [];
 
 interface TodoState {
   todos: TodosProps;
@@ -27,8 +17,8 @@ interface TodoState {
   deleteCompleteTodo: () => void;
 }
 
-const useTodoStore = create(
-  persist<TodoState>(
+const useTodoStore = create<TodoState>()(
+  persist(
     (set) => ({
       todos: initialState,
       filter: "All",
@@ -50,12 +40,12 @@ const useTodoStore = create(
           todos: state.todos.filter((item) => item.text.includes(query.toLowerCase())),
         })),
       filterTodo: (filter) =>
-        set((state) => ({
+        set(() => ({
           filter,
         })),
       deleteCompleteTodo: () =>
         set((state) => ({
-          todos: state.todos.filter((item) => !item.complete),
+          todos: filterActiveTodo(state.todos),
         })),
     }),
     { name: "todo-storage", storage: createJSONStorage(() => sessionStorage) }
