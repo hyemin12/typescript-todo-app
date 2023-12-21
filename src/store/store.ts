@@ -48,7 +48,7 @@ const useTodoStore = create<TodoState>()(
           todos: filterActiveTodo(state.todos),
         })),
     }),
-    { name: "todo-storage", storage: createJSONStorage(() => sessionStorage) }
+    { name: "todo-storage", storage: createJSONStorage(() => localStorage) }
   )
 );
 
