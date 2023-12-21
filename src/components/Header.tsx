@@ -18,7 +18,7 @@ function Header({ todos }: { todos?: TodosProps }) {
   const todolist = storageTodos ?? todos;
 
   const remain = filterActiveTodo(todolist);
-
+  console.log(todolist, remain, todos);
   return (
     <header>
       <h4>

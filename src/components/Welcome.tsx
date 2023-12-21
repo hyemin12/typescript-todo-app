@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import Header from "components/Header";
 import CreateTodo from "components/CreateTodo";
 import Button from "components/Button";
+import Checkbox from "./Checkbox";
 
 const Welcome = ({ setWelcomeTip }: { setWelcomeTip: Dispatch<SetStateAction<boolean>> }) => {
   const todos = [
@@ -24,9 +25,9 @@ const Welcome = ({ setWelcomeTip }: { setWelcomeTip: Dispatch<SetStateAction<boo
       </div>
 
       <ul className='todo-list'>
-        <li className={(complete ? "done " : "") + "todo-item"}>
+        <li className='todo-item'>
           <>
-            <input type='checkbox' id={`check-${id}`} checked={complete} />
+            <Checkbox state={todos[0]} />
             <label htmlFor={`check-${id}`}>{complete ? <i className='fas fa-check'></i> : ""}</label>
           </>
           <p>{text}</p>
