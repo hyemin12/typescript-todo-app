@@ -10,7 +10,7 @@ import useTodoStore from "store/store";
 import "style.scss";
 
 function App() {
-  const { deleteCompleteTodo } = useTodoStore();
+  const { deleteCompleteTodo, todos } = useTodoStore();
   const [welcomeTip, setWelcomeTip] = useState(false);
 
   return (
@@ -27,7 +27,12 @@ function App() {
               <TodoList setWelcomeTip={setWelcomeTip} />
               <div className='feature-wrapper'>
                 <Filters />
-                <Button $type='transparent' text='완료 할일 삭제' action={deleteCompleteTodo} />
+                <Button
+                  $type='transparent'
+                  text='완료 할일 삭제'
+                  $disabled={todos.length === 0}
+                  action={deleteCompleteTodo}
+                />
               </div>
             </>
           )}
