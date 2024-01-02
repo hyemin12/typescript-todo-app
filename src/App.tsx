@@ -5,7 +5,7 @@ import TodoList from "components/TodoList";
 import Welcome from "components/Welcome";
 import Button from "components/Button";
 import Filters from "components/Filters";
-
+import { filterCompleteTodo } from "utils/filteredTodos";
 import useTodoStore from "store/store";
 import "style.scss";
 
@@ -30,7 +30,7 @@ function App() {
                 <Button
                   $type='transparent'
                   text='완료 할일 삭제'
-                  $disabled={todos.length === 0}
+                  $disabled={filterCompleteTodo(todos).length === 0}
                   action={deleteCompleteTodo}
                 />
               </div>

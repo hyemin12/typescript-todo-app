@@ -8,7 +8,7 @@ interface FilterItemProps {
 }
 
 const FilterRadio = ({ name, value, action }: FilterItemProps) => {
-  const { filter } = useTodoStore();
+  const { filter, todos } = useTodoStore();
   return (
     <div className='filter-radio' onClick={action}>
       <input
@@ -17,6 +17,7 @@ const FilterRadio = ({ name, value, action }: FilterItemProps) => {
         name={name}
         checked={filter.toLowerCase() === value.toLowerCase()}
         value={value}
+        disabled={todos.length === 0}
         onChange={() => {}}
       />
       <label htmlFor={`filter${value}`}>{value}</label>

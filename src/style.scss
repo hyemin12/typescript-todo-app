@@ -89,6 +89,7 @@ button {
     border-radius: 5px;
     box-shadow: 3px 5px 5px #ccc;
     position: relative;
+    overflow: hidden;
     // header
     header {
       padding: 30px 30px 15px 30px;
@@ -256,7 +257,12 @@ button {
       label:hover,
       input[type="radio"]:checked + label,
       input[type="radio"]:focus + label {
-        color: #555 !important;
+        color: #555;
+      }
+      input[type="radio"]:disabled + label,
+      input[type="radio"]:disabled + label:hover {
+        color: $grayColor;
+        cursor: initial;
       }
       label {
         cursor: pointer;
@@ -268,7 +274,17 @@ button {
 // Welcome
 .welcome-tip-wrapper {
   width: 100%;
+  max-width: 650px;
   height: 100%;
-  position: relative;
-  z-index: 10;
+  background-color: #6e6e6e;
+  .btn {
+    color: #fff;
+    font-size: 1em;
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+  }
+  img {
+    width: 100%;
+  }
 }
