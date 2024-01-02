@@ -11,7 +11,7 @@ $dangerColor: rgb(255, 14, 14);
 }
 body {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 li {
@@ -81,7 +81,7 @@ button {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 100px;
+  padding-top: 100px;
 
   div.inner {
     min-width: 590px;
