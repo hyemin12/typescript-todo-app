@@ -1,0 +1,136 @@
+@import "./shared-styles.scss";
+
+// common
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+li {
+  list-style: none;
+}
+input {
+  flex-grow: 1;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid $grayColor;
+  font-size: 1em;
+}
+input:focus {
+  outline: none;
+}
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all $transitionDuration;
+  :focus {
+    border: none;
+    outline: $mainColor;
+  }
+  &.primary {
+    background-color: $mainColor;
+    color: #fff;
+  }
+  &.gray {
+    background-color: $grayColor;
+  }
+  &.border {
+    border: 1px solid #555;
+  }
+  &.border_primary {
+    border: 1px solid $mainColor;
+  }
+  &:hover {
+    opacity: 0.6;
+  }
+  &.disabled {
+    opacity: 0.7;
+    cursor: inherit;
+  }
+  // .icon_btn 스타일
+  &.icon_btn {
+    background-color: transparent;
+    color: #555;
+
+    &.primary {
+      color: $mainColor;
+    }
+
+    &.danger {
+      color: $dangerColor;
+    }
+
+    &.gray {
+      color: $grayColor;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-top: 100px;
+
+  div.inner {
+    min-width: 590px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 5px 5px #ccc;
+    position: relative;
+    overflow: hidden;
+    // header
+    header {
+      padding: 30px 30px 15px 30px;
+      h4 {
+        font-size: 1.6em;
+      }
+      p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+      span {
+        color: $mainColor;
+      }
+      > div {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.feature-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #f4f4f4;
+  padding: 6px 25px;
+}
+
+.welcome-tip-wrapper {
+  width: 100%;
+  max-width: 650px;
+  height: 100%;
+  background-color: #6e6e6e;
+  .btn {
+    color: #fff;
+    font-size: 1em;
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+  }
+  img {
+    width: 100%;
+  }
+}

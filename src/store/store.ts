@@ -7,7 +7,7 @@ const initialState: TodosProps = [];
 
 interface TodoState {
   todos: TodosProps;
-  filter: string;
+  filterType: string;
   addTodo: (todo: TodoProps) => void;
   editTodo: ({ text, id }: { text: string; id: number }) => void;
   toggleCompleteTodo: (id: number) => void;
@@ -21,7 +21,7 @@ const useTodoStore = create<TodoState>()(
   persist(
     (set) => ({
       todos: initialState,
-      filter: "All",
+      filterType: "All",
       addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
       editTodo: ({ text, id }) =>
         set((state) => ({
@@ -39,9 +39,9 @@ const useTodoStore = create<TodoState>()(
         set((state) => ({
           todos: state.todos.filter((item) => item.text.includes(query.toLowerCase())),
         })),
-      filterTodo: (filter) =>
+      filterTodo: (filterType) =>
         set(() => ({
-          filter,
+          filterType,
         })),
       deleteCompleteTodo: () =>
         set((state) => ({

@@ -1,0 +1,35 @@
+@import "assets/scss/shared-styles.scss";
+
+.fieldset {
+  display: flex;
+  gap: 6px;
+  border: none;
+}
+.radio_wrapper {
+  input[type="radio"] {
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+  }
+  label {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 0.8em;
+    color: $grayColor;
+    transition: all $transitionDuration;
+  }
+  label:hover,
+  input[type="radio"]:checked + label,
+  input[type="radio"]:focus + label {
+    color: #555;
+  }
+  input[type="radio"]:disabled + label,
+  input[type="radio"]:disabled + label:hover {
+    color: $grayColor;
+    cursor: initial;
+  }
+  label {
+    cursor: pointer;
+  }
+}

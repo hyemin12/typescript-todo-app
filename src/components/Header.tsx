@@ -1,6 +1,5 @@
 import useTodoStore from "store/store";
 import { filterActiveTodo } from "utils/filteredTodos";
-import { TodosProps } from "type/type";
 
 const getDate = () => {
   const now = new Date();
@@ -12,13 +11,12 @@ const getDate = () => {
   return { year, month, date, week: week[day] };
 };
 
-function Header({ todos }: { todos?: TodosProps }) {
+function Header() {
   const { year, month, date, week } = getDate();
-  const { todos: storageTodos } = useTodoStore();
-  const todolist = storageTodos ?? todos;
+  const { todos } = useTodoStore();
 
-  const remain = filterActiveTodo(todolist);
-  console.log(todolist, remain, todos);
+  const remain = filterActiveTodo(todos);
+
   return (
     <header>
       <h4>

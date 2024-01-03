@@ -1,0 +1,18 @@
+@import "assets/scss/shared-styles.scss";
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  p {
+    width: 360px;
+    transition: $transitionDuration;
+    flex-grow: 1;
+  }
+  &.done {
+    p {
+      color: #ccc;
+      text-decoration: line-through;
+    }
+  }
+}

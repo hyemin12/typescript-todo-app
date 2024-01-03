@@ -9,11 +9,11 @@ interface ButtonProps {
 function Button({ action, icon, $type, text, $disabled = false }: ButtonProps) {
   return (
     <button
-      className={`btn ${$type} ${icon ? "icon_btn" : " "} ${$disabled ? "disabled" : " "}`}
+      className={`btn ${$type} ${icon ? "icon_btn" : ""} ${$disabled ? "disabled" : ""}`}
       onClick={action}
-      disabled={$disabled}
+      aria-disabled={$disabled}
     >
-      {icon ? <i className={icon}></i> : <>{text}</>}
+      {icon ? <i className={icon}></i> : text && text}
     </button>
   );
 }
