@@ -1,7 +1,53 @@
 # typescript Todo App
 
-<a href="https://hm-tsc-todo-app.netlify.app/" target="_blank"><img src="https://raw.githubusercontent.com/hyemin12/2022_portfolio/master/public/assets/nodejs-mysql.webp" /></a>
-이미지를 클릭하면 배포 사이트로 이동합니다.
+[사이트](https://hm-tsc-todo-app.netlify.app/)로 이동
+
+### ☑️ skill
+
+### 📂 디렉토리 구조
+
+### ☑️ 패키지 설치
+
+<details>
+<summary>디렉토리 구조 전체보기</summary>
+
+```
+├── 📁assets
+│   └── 📁img
+│       └── todoListTip.png
+├── 📁components
+│   ├── Button.tsx
+│   ├── Checkbox.tsx
+│   ├── CreateTodo.tsx
+│   ├── Filters.tsx
+│   ├── FilterRadio.tsx
+│   ├── Header.tsx
+│   ├── Input.tsx
+│   ├── TodoItem.tsx
+│   ├── TodoList.tsx
+│   └── Welcome.tsx
+├── 📁store
+│   └── store.ts
+├── 📁type
+│   └── type.ts
+├── 📁utils
+│   └── filteredTodos.ts
+├── App.tsx
+├── index.tsx
+└── style.scss
+```
+
+</details>
+
+### ☑️ 기능
+
+- [x] 할일 추가 기능
+- [x] 할일 목록을 보여주는 목록 기능
+- [x] 할일 완료 기능
+- [x] 신규 유저 Welcoming 툴팁
+- [x] 할 일 상태에 따른 필터링 기능을 추가
+
+### ☑️ 시현 영상
 
 - 할일 목록을 보여주는 목록과 할 일을 추가 기능 구현
 
@@ -21,9 +67,7 @@
   - 할 일 완료 알림 설정
     - 사용자가 할 일을 완료하지 않았을 경우, 설정된 시간에 알림을 보내주는 기능입니다.
 
-- 할 일 상태에 따른 필터링 기능을 추가
-
-  - 필터링된 할 일 목록을 저장 / 불러오기 기능
+- - 필터링된 할 일 목록을 저장 / 불러오기 기능
     - 사용자가 설정한 필터링 조건(예: 완료된 할 일만 보기, 미완료된 할 일만 보기)을 로컬 저장소에 저장하고, 앱을 다시 실행할 때 이전의 필터링 상태를 유지하게 하는 기능입니다
   - 필터링 옵션에 우선 순위 설정
     - 사용자가 다양한 필터링 조건(예: 마감 기한이 임박한 할 일, 추가된 지 오래된 할 일 등)을 설정할 수 있으며, 이들 중 어떤 조건을 우선 적용할지 설정할 수 있는 기능입니다.
@@ -46,116 +90,3 @@
 - Todo Item 삭제
 - Todo Item 완료 여부 (체크박스)
 - 남은 할일 개수
-
-<br>
-<br>
-
-## 컴포넌트 구성
-
-- Header : 날짜 및 남은 할일 개수
-- TodoList : 할일 목록 리스트 <br>(TodoItem으로 이루어져 있음, 존재하지 않으면 존재하지 않는 메세지 출력)
-- TodoItem : 할일 (Checkbox : 할일 완료 여부 체크, Input : 할일 수정 시 화면에 출력, Button: 수정, 삭제 버튼)
-- TodoInsert : 투두 작성 컴포넌트 <br>(add 버튼 누르면 새로운 할일 목록 생성)
-- CreateBtn : 할일 작성 컴포넌트를 보여주고, 숨기는 버튼 <br>(create 모드로 전환 시 + 모양이 x 모양으로 변경되고, TodoInsert 컴포넌트가 보여짐)
-- TodoItem : 할일 목록 <br>(완료 여부 checkbox, 할일 내용, 삭제버튼으로 이루어져있음)
-
-<br>
-<br>
-
-2022.12 ver.
-
-## useLocalStorage 훅 만들어서 로컬스토리지를 통해 투두리스트 데이터 관리
-
-App에서 useLocalStorage 훅을 불러와서, 하위 컴포넌트들에게 전달하여 state 값 변경함
-
-```js
-// hooks/useLocalStorage.js
-import { useState, useEffect } from "react";
-
-const useLocalStorage = (key, initialValue) => {
-  const localDB = JSON.parse(localStorage.getItem(key));
-
-  const [state, setState] = useState(localDB || initialValue);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
-  }, [state]);
-  return [state, setState];
-};
-export default useLocalStorage;
-```
-
-```js
-// App.js
-
-function App() {
-  // setTodos : setState와 같은 역할, 변경시키면 localStorage가 변경됨
-  const [todos, setTodos] = useLocalStorage("todoApp", initialState);
-
-  const [createMode, setCreate] = useState < boolean > false;
-
-  return (
-    <div className='App'>
-      <div className='container'>
-        <div className='inner'>
-          <Header todos={todos} />
-          <TodoList todos={todos} setTodos={setTodos} />
-          <TodoInsert createMode={createMode} setCreate={setCreate} todos={todos} setTodos={setTodos} />
-          <CreateBtn createMode={createMode} setCreate={setCreate} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-2022.11 ver.
-
-## todo list 로컬스토리지에서 관리
-
-1. 첫 로드 시 로컬스토리지에서 해당 투두 리스트 가져오기 (비동기)
-
-- 없을 경우: 초기값 세팅
-- 있을 경우: JSON.parse해서 dispatch 하기
-
-2. redux store에서 state값으로 세팅
-
-3. state 가져와서 각 컴포넌트에서 사용하기
-
-```js
-// App.js
-
-// todos 가져오기 (redux store에서)
-const todos = useSelector((state: RootState) => state.todoReducer);
-
-const dispatch = useDispatch();
-
-// 첫 로드 시 todolist 가져오기
-const getData = async () => {
-  const res = await localStorage.getItem("todoApp");
-  if (res !== null) {
-    dispatch(getTodo(JSON.parse(res)));
-  } else {
-    dispatch(
-      getTodo([
-        {
-          id: 1234,
-          text: "타입스크립트 공부하기",
-          done: false,
-        },
-        {
-          id: 555,
-          text: "할일 완료!",
-          done: true,
-        },
-      ])
-    );
-  }
-};
-
-useEffect(() => {
-  getData();
-}, []);
-```
