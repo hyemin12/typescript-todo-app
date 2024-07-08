@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Button from "components/Button";
 import useTodoStore from "store/store";
-import styles from "./createTodo.module.scss";
+import styles from "../assets/scss/createTodo.module.scss";
 
 function CreateTodo() {
   const { addTodo } = useTodoStore();
@@ -37,7 +37,13 @@ function CreateTodo() {
   return (
     <div className={styles.container}>
       <form onSubmit={onSubmit}>
-        <input type='text' placeholder='할 일을 입력하세요.' required value={value} onChange={onChange} />
+        <input
+          type='text'
+          placeholder='할 일을 입력하세요.'
+          required
+          value={value}
+          onChange={onChange}
+        />
         <Button $type='primary' text='등록' />
       </form>
       {errorMessage && <p className={styles.error_msg}>{errorMessage}</p>}

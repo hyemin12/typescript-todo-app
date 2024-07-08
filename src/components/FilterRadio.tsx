@@ -1,5 +1,5 @@
 import useTodoStore from "store/store";
-import styles from "./filterRadios.module.scss";
+import styles from "../assets/scss/filterRadios.module.scss";
 
 const FilterRadio = ({ value }: { value: string }) => {
   const { filterType, todos, filterTodo } = useTodoStore();

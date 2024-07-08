@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Checkbox from "components/checkbox";
+import Checkbox from "components/Checkbox";
 import Input from "components/Input";
 import Button from "components/Button";
 import useTodoStore from "store/store";
 import { TodoProps } from "type/type";
-import styles from "./todoItem.module.scss";
+import styles from "../assets/scss/todoItem.module.scss";
 
 const EDIT_ICON_CLASS = "fas fa-pen";
 const DELETE_ICON_CLASS = "fas fa-minus-circle";
@@ -28,14 +28,36 @@ function TodoItem({ todo }: { todo: TodoProps }) {
     <li className={(complete ? "done " : "") + styles.item}>
       <Checkbox state={todo} />
 
-      {isEdit ? <Input type='text' state={newText} changeValue={setNewText} placeholder='' /> : <p>{todo.text}</p>}
+      {isEdit ? (
+        <Input
+          type='text'
+          state={newText}
+          changeValue={setNewText}
+          placeholder=''
+          isEdit={isEdit}
+        />
+      ) : (
+        <p>{todo.text}</p>
+      )}
 
       {isEdit ? (
         <Button action={handleEdit} icon={CHECK_ICON_CLASS} $type='primary' />
       ) : (
         <div className='btn_wrapper'>
-          <Button action={handleEdit} icon={EDIT_ICON_CLASS} $type='default' $disabled={complete} />
-          <Button action={() => deleteTodo(id)} icon={DELETE_ICON_CLASS} $type='danger' />
+          {!complete && (
+            <Button
+              action={handleEdit}
+              icon={EDIT_ICON_CLASS}
+              $type='default'
+              $disabled={complete}
+            />
+          )}
+
+          <Button
+            action={() => deleteTodo(id)}
+            icon={DELETE_ICON_CLASS}
+            $type='danger'
+          />
         </div>
       )}
     </li>

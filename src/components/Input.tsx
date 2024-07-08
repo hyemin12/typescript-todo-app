@@ -8,7 +8,13 @@ interface InputProps {
   isEdit?: boolean;
 }
 
-const Input = ({ state, changeValue, type, placeholder, isEdit }: InputProps) => {
+const Input = ({
+  state,
+  changeValue,
+  type,
+  placeholder,
+  isEdit,
+}: InputProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeValue(e.target.value);
   };

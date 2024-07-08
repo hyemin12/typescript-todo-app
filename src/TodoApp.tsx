@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import CreateTodo from "components/createTodo";
 import Header from "components/Header";
-import TodoList from "components/todoList";
 import Welcome from "components/Welcome";
 import Button from "components/Button";
-import FilterRadios from "components/filterRadios";
 import { filterCompleteTodo } from "utils/filteredTodos";
 import useTodoStore from "store/store";
 import "assets/scss/style.scss";
+import CreateTodo from "components/CreateTodo";
+import TodoList from "components/TodoList";
+import FilterRadios from "components/FilterRadios";
 
 function TodoApp() {
   const { deleteCompleteTodo, todos } = useTodoStore();
