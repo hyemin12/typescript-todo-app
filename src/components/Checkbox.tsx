@@ -1,6 +1,6 @@
 import useTodoStore from "store/store";
-import { TodoProps } from "type/type";
-import styles from "../assets/scss/checkbox.module.scss";
+import { TodoProps } from "type/todoType";
+import styles from "assets/scss/checkbox.module.scss";
 
 const Checkbox = ({ state }: { state: TodoProps }) => {
   const { id, complete } = state;
