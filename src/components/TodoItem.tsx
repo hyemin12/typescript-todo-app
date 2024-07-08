@@ -3,8 +3,8 @@ import Checkbox from "components/Checkbox";
 import Input from "components/Input";
 import Button from "components/Button";
 import useTodoStore from "store/store";
-import { TodoProps } from "type/type";
-import styles from "../assets/scss/todoItem.module.scss";
+import { TodoProps } from "type/todoType";
+import styles from "assets/scss/todoItem.module.scss";
 
 const EDIT_ICON_CLASS = "fas fa-pen";
 const DELETE_ICON_CLASS = "fas fa-minus-circle";

@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import TodoItem from "components/TodoItem";
 import useTodoStore from "store/store";
 import { filterActiveTodo, filterCompleteTodo } from "utils/filteredTodos";
-import { TodosProps } from "type/type";
-import styles from "../assets/scss/todoList.module.scss";
+import { TodosProps } from "type/todoType";
+import styles from "assets/scss/todoList.module.scss";
 
 interface TodoListProps {
   setWelcomeTip: Dispatch<SetStateAction<boolean>>;
@@ -54,7 +54,7 @@ function TodoList({ setWelcomeTip }: TodoListProps) {
     return (
       <div className={styles.empty_todo}>
         <h4>
-          {filterType === "active" ? "진행 중인" : "완료된"}할 일이 없습니다.
+          {filterType === "Active" ? "진행 중인" : "완료된"}할 일이 없습니다.
         </h4>
       </div>
     );

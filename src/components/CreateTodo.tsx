@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Button from "components/Button";
 import useTodoStore from "store/store";
-import styles from "../assets/scss/createTodo.module.scss";
+import styles from "assets/scss/createTodo.module.scss";
 
 function CreateTodo() {
   const { addTodo } = useTodoStore();
