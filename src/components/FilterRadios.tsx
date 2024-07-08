@@ -1,13 +1,13 @@
 import FilterRadio from "./FilterRadio";
-import styles from "../assets/scss/filterRadios.module.scss";
+import styles from "assets/scss/filterRadios.module.scss";
+import { FilterTypes } from "type/todoType";
 
-type ListType = "All" | "Active" | "Complete";
-const list: ListType[] = ["All", "Active", "Complete"];
+export const filterTypes: FilterTypes[] = ["All", "Active", "Complete"];
 
 const FilterRadios = () => {
   return (
     <fieldset className={styles.fieldset}>
-      {list.map((value) => (
+      {filterTypes.map((value) => (
         <FilterRadio value={value} key={value} />
       ))}
     </fieldset>
